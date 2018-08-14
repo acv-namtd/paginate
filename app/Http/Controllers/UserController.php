@@ -74,26 +74,5 @@ class UserController extends Controller
     }
     public function paginate(Request $request)
     {
-    	$key = "";
-    	if(isset($request->key)){
-    		$key = $request->key;
-    		$arr = UserModel::select("id","name","email","address","is_active")->where([["name","like","%".$key."%"],["is_deleted",0]])
-    			->orWhere([["email","like",'%'.$key."%"],["is_deleted",0]])
-    			->orderby("id","desc")->paginate(5);
-            return response()->json([
-                'data' => $arr,
-                'key'   => $key
-            ]);
-    	}
-    	else{
-    		$arr = UserModel::select("id","name","email","address","is_active")->where("is_deleted",0)
-                    ->orderby("id","desc")
-                    ->paginate(5);
-            $data = json_encode($arr);
-    		return response()->json([
-                'data' => $arr,
-                'key'   => $key
-            ]);
-        }
     }
 }

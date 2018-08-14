@@ -11,7 +11,10 @@ class UserController extends Controller
 {
     public function list()
     {
-    	return view("user.list");
+        $arr = UserModel::where("is_deleted",0)
+                    ->orderby("id","desc")
+                    ->paginate(5);
+    	return view("user.list",['arr' => $arr]);
     }
     public function getInsert()
     {

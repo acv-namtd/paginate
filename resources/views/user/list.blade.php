@@ -64,6 +64,7 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 			</div>
 			<div>
 				<span class="pull-right" id="page">
+					{!!$arr->links()!!}
 				</span>
 			</div>
 		</div>
@@ -78,16 +79,17 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	$(document).ready(function(){
 		$.get("paginate",function(data){
 			buildList(data.data,data.key);
-			buildPaginate(data.data,data.key);
+			// buildPaginate(data.data,data.key);
 			console.log(data.data);
 			dataTable();
 		});
 	});
-	$('body').on('click', '.paginate', function(e){
-		var href = $(this).data("page");
+	$('body').on('click', '.page-link', function(e){
+		var href = $(this).attr('href');
+		e.preventDefault();
 		$.get(href,function(data){
 			buildList(data.data,data.key);
-			buildPaginate(data.data,data.key);
+			// buildPaginate(data.data,data.key);
 			dataTable();
 		});
 	});

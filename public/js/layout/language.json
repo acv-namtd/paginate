@@ -1,0 +1,17 @@
+{
+      "sProcessing":   "Đang xử lý...",
+      "sLengthMenu":   "Hiển thị _MENU_ mục",
+      "sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
+      "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+      "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+      "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+      "sInfoPostFix":  "",
+      "sSearch":       "<span class='glyphicon glyphicon-search btn btn-warning'></span>",
+      "sUrl":          "",
+      "oPaginate": {
+      "sFirst":    "<span class='glyphicon glyphicon-fast-backward'></span>",
+      "sPrevious": "<span class='glyphicon glyphicon-step-backward'></span>",
+      "sNext":     "<span class='glyphicon glyphicon-step-forward'></span>",
+      "sLast":     "<span class='glyphicon glyphicon-fast-forward'></span>"
+          }
+}                       

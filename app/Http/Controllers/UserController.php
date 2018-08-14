@@ -72,7 +72,7 @@ class UserController extends Controller
     		UserModel::where("id",$obj)->update(["is_deleted" => 1]);
     	}
     }
-    public function paginate(Request $request)
+    public function data(Request $request)
     {
         $key = "";
         if(isset($request->key)){
@@ -94,6 +94,24 @@ class UserController extends Controller
                 'data' => $arr,
                 'key'   => $key
             ]);
+        }
+    }
+    public function paginate(Request $request)
+    {
+        $key = "";
+        if(isset($request->key)){
+            $key = $request->key;
+            $arr = UserModel::select("id")->where([["name","like","%".$key."%"],["is_deleted",0]])
+                ->orWhere([["email","like",'%'.$key."%"],["is_deleted",0]])
+                ->orderby("id","desc")->paginate(5);
+            return view("user.paginate",["arr" => $arr,"key" => $key]);
+        }
+        else{
+            $arr = UserModel::select("id")->where("is_deleted",0)
+                    ->orderby("id","desc")
+                    ->paginate(5);
+            $data = json_encode($arr);
+            return view("user.paginate",["arr" => $arr,"key" => $key]);
         }
     }
 }

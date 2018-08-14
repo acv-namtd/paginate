@@ -29,5 +29,7 @@ Route::get("delete","UserController@delete");
 Route::get("delete_all","UserController@delete_all");
 //Search
 Route::get("search","UserController@search");
+//Data
+Route::get("data","UserController@data");
 //Phân trang
 Route::get("paginate","UserController@paginate");

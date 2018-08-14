@@ -62,8 +62,8 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 			</div>
 			<div id="table-search">
 			</div>
-			<div>
-				<span class="pull-right" id="page">
+			<div class="page">
+				<span class="pull-right">
 					{!!$arr->links()!!}
 				</span>
 			</div>
@@ -77,7 +77,7 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	var dem=0;
 	//phân trang
 	$(document).ready(function(){
-		$.get("paginate",function(data){
+		$.get("data",function(data){
 			buildList(data.data,data.key);
 			// buildPaginate(data.data,data.key);
 			console.log(data.data);
@@ -87,22 +87,34 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	$('body').on('click', '.page-link', function(e){
 		var href = $(this).attr('href');
 		var page = href.match(/page=([0-9]+)/)[1];
-		alert(page);
-		e.preventDefault();
-		$.get(href,function(data){
+		var key = '';
+		e.preventDefault();	
+		if(href.includes("key")){
+			key = href.match(/key=([a-zA-Z0-9]*)/)[1];
+			if(!key){
+				key = "";
+			}
+		}
+		$.get("data",{page:page,key:key},function(data){
 			buildList(data.data,data.key);
 			// buildPaginate(data.data,data.key);
 			dataTable();
 		});
+		$.get("paginate",{page:page,key:key},function(data){
+			$(".page").html(data);
+		});
 	});
 	//search
 	$('body').on('keyup', '.key', function(e){
-	var key = $(this).val();
-	$.get("paginate",{key:key},function(data){
-		buildList(data.data,data.key);
-		buildPaginate(data.data,data.key);
-		dataTable();
-	});
+		var key = $(this).val();
+		$.get("data",{key:key},function(data){
+			buildList(data.data,data.key);
+			// buildPaginate(data.data,data.key);
+			dataTable();
+		});
+		$.get("paginate",{key:key},function(data){
+			$(".page").html(data);
+		});
 	});
 	//check all
 	$('body').on('click', '#check_all', function(e){
@@ -229,10 +241,11 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 				success:function(data){
 					$(".noti").css("display","block");
 					$(".noti-success").html("Edit user success");
-					$.get("paginate",{key:key},function(data){
+					$.get("data",{key:key},function(data){
 						buildList(data.data,data.key);
-						buildPaginate(data.data,data.key);
 						dataTable();
+					});
+					$.get("paginate",{key:key},function(data){
 					});
 				}
 			});

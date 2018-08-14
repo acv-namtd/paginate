@@ -86,6 +86,8 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	});
 	$('body').on('click', '.page-link', function(e){
 		var href = $(this).attr('href');
+		var page = href.match(/page=([0-9]+)/)[1];
+		alert(page);
 		e.preventDefault();
 		$.get(href,function(data){
 			buildList(data.data,data.key);

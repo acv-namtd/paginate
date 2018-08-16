@@ -22,14 +22,14 @@ class UserController extends Controller
     }
     public function postInsert(Request $request)
     {
-    	$name = $request->name;
-    	$email = $request->email;
-    	$address = $request->address;
+        $name    = $request->name;
+        $email   = $request->email;
+        $address = $request->address;
     	UserModel::insert(
     		[
-    			"name" => $name, 
-    			"email"	=> $email, 
-    			"address" => $address
+                "name"    => $name, 
+                "email"   => $email, 
+                "address" => $address
     		]
     	);
     	return redirect()->route('list')->with("success","Insert user success");

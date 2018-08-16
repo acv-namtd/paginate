@@ -1,13 +1,23 @@
 @push("css")
 <style type="text/css">
-.listUser{margin-right: auto; margin-left: auto; float: none !important; margin-top: 5%;
+
+.listUser{
+	margin-right: auto; 
+	margin-left : auto; 
+	float       : none !important; 
+	margin-top  : 5%;
 }
 
 .round{border-radius: 10px;}
 
 thead,tfoot{color: white}
 
-#check_all{ width: 50px; height: 30px; background: #ffc107; color: white;}
+#check_all{ 
+	width     : 50px; 
+	height    : 30px; 
+	background: #ffc107; 
+	color     : white;
+}
 
 .check{ width:20px; height: 30px;}
 
@@ -31,7 +41,12 @@ th.sorting::after{opacity: 0.7 !important; font-weight: bold;}
 
 .noti{display: none}
 
-button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; width: 38px;}
+button.active{ 
+	background: #4EEF83 !important;
+	border    : #3EDB63;
+	height    : 38px;
+	width     : 38px;
+}
 </style>
 @endpush
 @extends("layout.index")
@@ -87,7 +102,7 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	$('body').on('click', '.page-link', function(e){
 		var href = $(this).attr('href');
 		var page = href.match(/page=([0-9]+)/)[1];
-		var key = '';
+		var key  = '';
 		e.preventDefault();	
 		if(href.includes("key")){
 			key = href.match(/key=([a-zA-Z0-9]*)/)[1];
@@ -166,7 +181,7 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	});
 	//delete all
 	$('body').on('click', '#delete_all', function(e){
-		var arr = [];
+		var arr  = [];
 		var rows = 0;
 		var checkboxes = document.getElementsByName('xoa[]');
 		for (var i = 0; i < checkboxes.length; i++){
@@ -203,7 +218,7 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 	});
 	//edit user
 	$('body').on('click', '.edit', function(e){
-		var id = $(this).data("id");
+		var id  = $(this).data("id");
 		var key = $(this).data("key");
 		$.get("edit",{id:id},function(data){
 			data = JSON.parse(data);
@@ -225,11 +240,11 @@ button.active{ background:#4EEF83 !important;border: #3EDB63; height: 38px; widt
 		if(key){
 			e.preventDefault(); 
 			$('#myModal').modal('hide')
-			var id = $('#id').val();
-			var name = $('#name').val();
-			var email = $('#email').val();
+			var id      = $('#id').val();
+			var name    = $('#name').val();
+			var email   = $('#email').val();
 			var address = $('#address').val();
-			var active = $('input[name=optradio]:checked').val();
+			var active  = $('input[name=optradio]:checked').val();
 			$.ajax({
 			    type: "POST",
 			    url: 'edit',
